@@ -347,9 +347,10 @@ b, strong { color: var(--fg-strong); }
         <h3>Ultrasound Imaging Enhancement</h3>
         <p class="meta">Project Leader · CICS Laboratory, NTU · Oct 2023 – present</p>
         <ul>
+          <li>Proposed UNIT-LDM, a two-stage unsupervised framework that aligns portable and high-end ultrasound images in a shared latent space, then refines them with latent diffusion guided by a self-supervised edge condition that preserves anatomy.</li>
+          <li>Distilled the 50-step diffusion sampler into a few-step student network, raising throughput to 32.3 FPS, above the 24 FPS native scan rate of the portable device, while giving the strongest structural preservation among compared methods on carotid ultrasound.</li>
           <li>Proposed SonoSDE, an unsupervised score-based diffusion framework that enhances handheld ultrasound images toward high-end clinical quality without paired training data.</li>
           <li>Designed physics-guided experts for SonoSDE: a Realistic Expert that matches frequency spectrum, speckle statistics and texture, and a training-free Faithful Expert based on Log-Gabor filters and phase congruency that preserves anatomy.</li>
-          <li>Developed an unsupervised latent diffusion model for real-time enhancement of portable medical ultrasound images.</li>
         </ul>
         <p class="note">Related: <a href="#publications">IEEE TIP (under review)</a></p>
       </div>
