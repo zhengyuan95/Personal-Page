@@ -344,13 +344,23 @@ b, strong { color: var(--fg-strong); }
       <p class="lede">Projects I have led or worked on, most recent first.</p>
 
       <div class="project">
-        <h3>Handheld Ultrasound and Photoacoustic Imaging Enhancement</h3>
+        <h3>Ultrasound Imaging Enhancement</h3>
+        <p class="meta">Project Leader · CICS Laboratory, NTU · Oct 2023 – present</p>
+        <ul>
+          <li>Proposed SonoSDE, an unsupervised score-based diffusion framework that enhances handheld ultrasound images toward high-end clinical quality without paired training data.</li>
+          <li>Designed physics-guided experts for SonoSDE: a Realistic Expert that matches frequency spectrum, speckle statistics and texture, and a training-free Faithful Expert based on Log-Gabor filters and phase congruency that preserves anatomy.</li>
+          <li>Developed an unsupervised latent diffusion model for real-time enhancement of portable medical ultrasound images.</li>
+        </ul>
+        <p class="note">Related: <a href="#publications">IEEE TIP (under review)</a></p>
+      </div>
+
+      <div class="project">
+        <h3>Handheld Photoacoustic Imaging Enhancement</h3>
         <p class="meta">Project Leader · CICS Laboratory, NTU · Oct 2023 – present</p>
         <ul>
           <li>Developed a real-time enhancement platform for a handheld photoacoustic imaging system, running a ternary-quantized MultiResU-Net on a FeRAM crossbar array for in-memory computing.</li>
-          <li>Proposed a fast crossbar charging model for hardware-aware training; the platform improved lateral resolution from 850 µm to 78 µm while keeping 30 Hz real-time imaging.</li>
-          <li>Proposed SonoSDE, an unsupervised score-based diffusion framework that enhances handheld ultrasound images toward high-end clinical quality without paired training data.</li>
-          <li>Designed physics-guided experts for SonoSDE: a Realistic Expert that matches frequency spectrum, speckle statistics and texture, and a training-free Faithful Expert based on Log-Gabor filters and phase congruency that preserves anatomy.</li>
+          <li>Proposed a fast crossbar charging model that accounts for line and parasitic conductance, enabling hardware-aware training.</li>
+          <li>Validated the platform in vivo: lateral resolution improved from 850 µm to 78 µm, network inference finished within microseconds, and 30 Hz real-time imaging was kept.</li>
         </ul>
         <p class="note">Related: <a href="https://doi.org/10.1109/TBCAS.2025.3538578">IEEE TBCAS 2025</a> · <a href="https://doi.org/10.1109/ISCAS56072.2025.11043306">ISCAS 2025</a></p>
       </div>
