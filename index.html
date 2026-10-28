@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Zhengyuan Zhang</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Zhengyuan Zhang, Postdoctoral Research Fellow at Nanyang Technological University, working on computational imaging and photoacoustic microscopy.">
+<meta property="og:title" content="Zhengyuan Zhang">
+<meta property="og:description" content="Computational imaging, inverse problems and photoacoustic microscopy at Nanyang Technological University.">
+<meta property="og:type" content="profile">
+<style>
+/* Layout: AcademicPages-style. A masthead nav across the top, a sticky author sidebar on the left and one reading column on the right. */
+:root {
+  --bg: #ffffff;
+  --fg: #494e52;
+  --fg-strong: #2c3033;
+  --muted: #7a8288;
+  --link: #1f7f9e;
+  --link-hover: #135c74;
+  --border: #e4e7e9;
+  --footer-bg: #f6f7f8;
+  --tint: #eaf3f6;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1b1e20; --fg: #c5cacf; --fg-strong: #eceff1; --muted: #8e969d;
+    --link: #6cc4de; --link-hover: #a3dcec; --border: #2f3438; --footer-bg: #212528; --tint: #1e3540;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1b1e20; --fg: #c5cacf; --fg-strong: #eceff1; --muted: #8e969d;
+  --link: #6cc4de; --link-hover: #a3dcec; --border: #2f3438; --footer-bg: #212528; --tint: #1e3540;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.6;
+}
+a { color: var(--link); text-decoration: none; }
+a:hover { color: var(--link-hover); text-decoration: underline; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 2px; }
+img { max-width: 100%; }
+b, strong { color: var(--fg-strong); }
+
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* Masthead */
+.masthead { border-bottom: 1px solid var(--border); }
+.masthead .wrap {
+  padding-block: 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 1.6rem;
+}
+.site-title { font-size: 1.2rem; font-weight: 700; color: var(--fg-strong); }
+.site-title:hover { color: var(--fg-strong); text-decoration: none; }
+.nav { display: flex; flex-wrap: wrap; gap: 0.35rem 1.4rem; margin: 0; padding: 0; list-style: none; }
+.nav a { position: relative; color: var(--muted); font-size: 0.95rem; }
+.nav a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px;
+  background: currentColor; transform: scaleX(0); transition: transform 0.2s ease;
+}
+.nav a:hover { color: var(--fg-strong); text-decoration: none; }
+.nav a:hover::after, .nav a[aria-current="page"]::after { transform: scaleX(1); }
+.nav a[aria-current="page"] { color: var(--fg-strong); }
+
+/* Main grid */
+.main {
+  padding-block: 2.2rem 3.5rem;
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: 3rem;
+}
+
+/* Sidebar */
+.sidebar { position: sticky; top: 2rem; align-self: start; font-size: 0.875rem; }
+.author { display: grid; gap: 0.6rem; }
+.avatar {
+  position: relative; width: 170px; max-width: 100%; aspect-ratio: 1; border-radius: 50%;
+  overflow: hidden; background: var(--tint); color: var(--link);
+  display: grid; place-items: center; font-size: 2.6rem; font-weight: 600; letter-spacing: 0.04em;
+}
+.avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.author-name { margin: 0.4rem 0 0; font-size: 1.25rem; line-height: 1.3; color: var(--fg-strong); }
+.author-bio { margin: 0; color: var(--muted); line-height: 1.5; }
+.follow-btn {
+  display: none; justify-self: start; font: inherit; font-size: 0.8rem; font-weight: 600;
+  padding: 0.3rem 0.9rem; border-radius: 4px; cursor: pointer;
+  background: var(--fg); color: var(--bg); border: 0;
+}
+.author-urls { list-style: none; margin: 0.6rem 0 0; padding: 0; display: grid; gap: 0.45rem; }
+.author-urls li { display: flex; gap: 0.55rem; align-items: baseline; min-width: 0; }
+.author-urls a { color: var(--fg); overflow-wrap: anywhere; }
+.author-urls a:hover { color: var(--link); }
+.i {
+  width: 1em; height: 1em; flex: none; position: relative; top: 0.14em;
+  fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  color: var(--muted);
+}
+
+/* Content */
+.content { min-width: 0; max-width: 780px; }
+.view h1 { margin: 0 0 0.6rem; font-size: 2rem; line-height: 1.25; color: var(--fg-strong); text-wrap: balance; }
+.view h2 {
+  margin: 2.2rem 0 0.9rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border);
+  font-size: 1.35rem; line-height: 1.3; color: var(--fg-strong); text-wrap: balance;
+}
+.view h3 { margin: 1.6rem 0 0.6rem; font-size: 1.05rem; color: var(--fg-strong); }
+.view p { margin: 0 0 1rem; }
+.view ul { padding-left: 1.3rem; margin: 0 0 1rem; }
+.view li + li { margin-top: 0.3rem; }
+.lede { color: var(--muted); font-size: 1.05rem; }
+.label { margin: 1.4rem 0 0.4rem; font-weight: 700; color: var(--fg-strong); }
+
+.news { list-style: none; padding: 0 !important; display: grid; gap: 0.5rem; }
+.news li { display: grid; grid-template-columns: 5.2rem minmax(0, 1fr); gap: 0.8rem; margin: 0 !important; }
+.news time { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 0.9rem; padding-top: 0.08rem; }
+
+.pubs { list-style: none; padding: 0 !important; display: grid; gap: 0.85rem; }
+.pubs li { margin: 0 !important; }
+.pubs em { font-style: italic; }
+.pubs .tag {
+  display: inline-block; margin-left: 0.25rem; padding: 0 0.4rem; border-radius: 3px;
+  background: var(--tint); color: var(--link); font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.03em; vertical-align: 0.08em;
+}
+.pubs .link { white-space: nowrap; }
+.note { color: var(--muted); font-size: 0.9rem; }
+
+.project { margin-bottom: 1.6rem; }
+.project h3 { margin-bottom: 0.15rem; }
+.meta { color: var(--muted); font-size: 0.9rem; margin: 0 0 0.5rem !important; }
+
+.cv-rows { display: grid; gap: 0.9rem; }
+.cv-row { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 1.2rem; }
+.cv-row .when { color: var(--muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; padding-top: 0.08rem; }
+.cv-row p { margin: 0 !important; }
+.cv-row .what strong { display: block; }
+
+/* Footer */
+.footer { background: var(--footer-bg); border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem; }
+.footer .wrap { padding-block: 1.4rem 2rem; display: grid; gap: 0.4rem; }
+.footer-follow { display: flex; flex-wrap: wrap; gap: 0.3rem 1.1rem; }
+.footer-follow strong { color: var(--fg); }
+.footer a { color: var(--muted); }
+.footer a:hover { color: var(--link); }
+
+@media (max-width: 820px) {
+  .main { grid-template-columns: minmax(0, 1fr); gap: 1.8rem; padding-block: 1.4rem 3rem; }
+  .sidebar { position: static; padding-bottom: 1.2rem; border-bottom: 1px solid var(--border); }
+  .author { grid-template-columns: 76px minmax(0, 1fr); column-gap: 1rem; align-items: center; }
+  .avatar { width: 76px; font-size: 1.4rem; grid-row: span 2; }
+  .author-name { margin: 0; }
+  .follow-btn { display: block; grid-column: 1 / -1; margin-top: 0.4rem; }
+  .author-urls { grid-column: 1 / -1; margin-top: 0.2rem; }
+  .author-urls:not(.open) { display: none; }
+  .view h1 { font-size: 1.7rem; }
+}
+@media (max-width: 520px) {
+  .news li, .cv-row { grid-template-columns: minmax(0, 1fr); gap: 0.1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav a::after { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="site-title" href="#about">Zhengyuan Zhang</a>
+    <nav aria-label="Main">
+      <ul class="nav">
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#teaching">Teaching</a></li>
+        <li><a href="#cv">CV</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap main">
+
+  <aside class="sidebar">
+    <div class="author">
+      <div class="avatar" aria-hidden="true">ZZ<img id="avatar-img" src="images/profile.jpg" alt=""></div>
+      <h3 class="author-name">Zhengyuan Zhang</h3>
+      <p class="author-bio">Postdoctoral Research Fellow at Nanyang Technological University, working on computational imaging and photoacoustic microscopy.</p>
+      <button class="follow-btn" id="follow-btn" type="button" aria-expanded="false" aria-controls="author-urls">Follow</button>
+      <ul class="author-urls" id="author-urls">
+        <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span>Singapore</span></li>
+        <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 10l10-6 10 6M4 21h16M6 21v-8M10 21v-8M14 21v-8M18 21v-8"/></svg><a href="https://www.ntu.edu.sg/eee">School of EEE, NTU</a></li>
+        <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><a href="mailto:zhengyua002@e.ntu.edu.sg">zhengyua002@e.ntu.edu.sg</a></li>
+        <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10.5V17M8 7.5v.01M12 17v-6.5M12 13.5c0-1.8 1.1-3 2.6-3s2.4 1 2.4 2.8V17"/></svg><a href="https://www.linkedin.com/in/zhengyuan-zhang-b9953b108/">LinkedIn</a></li>
+        <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5-10-5z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg><a href="https://scholar.google.com/citations?user=5bXWG04AAAAJ&amp;hl=en">Google Scholar</a></li>
+        <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5M8 13h8M8 17h6"/></svg><a href="files/Zhengyuan_Zhang_CV.pdf">CV (PDF)</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main class="content">
+
+    <!-- ===================== ABOUT ===================== -->
+    <section class="view" data-view="about" data-label="About">
+      <h1>Zhengyuan Zhang</h1>
+      <p class="lede">Computational imaging · Inverse problems · Photoacoustic microscopy</p>
+
+      <h2>A short introduction</h2>
+      <p>I am a Postdoctoral Research Fellow at the School of Electrical and Electronic Engineering, Nanyang Technological University (NTU), Singapore, working with Prof. Yuanjin Zheng. I received my Ph.D. from NTU in 2024, where I worked on computational imaging with a full NTU Ph.D. scholarship. Before that, I received my M.Eng. in Mechatronics Engineering from the State Key Laboratory of Robotics and System at Harbin Institute of Technology (HIT), supervised by Academician Hong Liu and Prof. Minghe Jin, and my B.Eng. in Mechanical Design, Manufacturing and Automation from HIT.</p>
+      <p>My research combines physical imaging models with deep learning to solve inverse problems in biomedical imaging. Most of my work is on acoustic-resolution photoacoustic microscopy (AR-PAM), where I develop degradation models, deep and plug-and-play priors, generative and diffusion-based reconstruction, and hardware-efficient implementations for real-time handheld systems.</p>
+
+      <h2>News</h2>
+      <ul class="news">
+        <li><time>Aug 2026</time><span>Started teaching <a href="#teaching">IN6242 Deep Learning Foundations</a>, a postgraduate course at NTU’s Wee Kim Wee School of Communication and Information.</span></li>
+        <li><time>2026</time><span>Our paper on physics-guided segmentation for lensless imaging was accepted by <em>IEEE Transactions on Emerging Topics in Computational Intelligence</em>.</span></li>
+        <li><time>2026</time><span>Our paper on maritime encounter risk forecasting was accepted by <em>Ocean Engineering</em>.</span></li>
+        <li><time>2025</time><span>Dual Branch Graph Induced Fusion Network for high temporal-lateral resolution PAM accepted by <em>IEEE Transactions on Computational Imaging</em>.</span></li>
+        <li><time>2025</time><span>Group sparsity with deep denoiser prior for AR-PAM published in <em>IEEE Transactions on Image Processing</em>.</span></li>
+        <li><time>2025</time><span>FeRAM neuromorphic design for real-time handheld photoacoustic imaging published in <em>IEEE Transactions on Biomedical Circuits and Systems</em>.</span></li>
+        <li><time>2025</time><span>Two papers presented orally at IEEE ISCAS 2025.</span></li>
+        <li><time>Jun 2024</time><span>Completed my Ph.D. at Nanyang Technological University.</span></li>
+        <li><time>Oct 2023</time><span>Joined the School of EEE, NTU as a Postdoctoral Research Fellow.</span></li>
+      </ul>
+
+      <p class="label">Research Interests:</p>
+      <ul>
+        <li>Computational Imaging</li>
+        <li>Image Restoration and Inverse Problems</li>
+        <li>Model-Based Deep Learning (deep priors, plug-and-play, diffusion models)</li>
+        <li>Photoacoustic Microscopy</li>
+        <li>Hardware Acceleration for Imaging</li>
+      </ul>
+
+      <p class="label">Research Highlights:</p>
+      <ul>
+        <li>Development of a deep and domain transfer learning framework that brings <a href="https://doi.org/10.1109/TMI.2022.3192072">acoustic-resolution PAM to optical resolution</a></li>
+        <li>Development of a model-based method for <a href="https://doi.org/10.1016/j.pacs.2023.100484">adaptive AR-PAM enhancement with a deep CNN prior</a></li>
+        <li>Development of an optimization scheme that <a href="https://doi.org/10.1109/TIP.2025.3526065">integrates group sparsity with a deep denoiser prior</a></li>
+        <li>Development of a dual branch network for <a href="https://doi.org/10.1109/TCI.2025.3643726">high temporal-lateral resolution PAM</a></li>
+        <li>Co-design of a <a href="https://doi.org/10.1109/TBCAS.2025.3538578">FeRAM crossbar neuromorphic accelerator</a> for real-time handheld photoacoustic imaging</li>
+        <li>Development of physics-guided feature inversion for <a href="https://doi.org/10.1109/TETCI.2026.3704931">semantic segmentation in lensless imaging</a></li>
+      </ul>
+
+      <h2>Selected Journal Publications</h2>
+      <ul class="pubs">
+        <li>Xiangjun Yin, Boyi Dong, <b>Zhengyuan Zhang</b>*, Wenbo Wang, Qing Liu, and Yuanjin Zheng. “Emergent Semantics in Lensless Imaging: Decoupled Segmentation with Physics-Guided Feature Inversion.” <em>IEEE Transactions on Emerging Topics in Computational Intelligence</em> (2026). <a class="link" href="https://doi.org/10.1109/TETCI.2026.3704931">link</a></li>
+        <li><b>Zhengyuan Zhang</b>, Xiangjun Yin, Zhuoyi Lin, Wenwen Zhang, Ze Feng, Arunima Sharma, Manojit Pramanik, Chia-Wen Lin, and Yuanjin Zheng. “High Temporal-Lateral Resolution Photoacoustic Microscopy Imaging with Dual Branch Graph Induced Fusion Network.” <em>IEEE Transactions on Computational Imaging</em> 12 (2025): 73–85. <a class="link" href="https://doi.org/10.1109/TCI.2025.3643726">link</a></li>
+        <li><b>Zhengyuan Zhang</b>, Zuozhou Pan, Zhuoyi Lin, Arunima Sharma, Chia-Wen Lin, Manojit Pramanik, and Yuanjin Zheng. “Acoustic Resolution Photoacoustic Microscopy Imaging Enhancement: Integration of Group Sparsity with Deep Denoiser Prior.” <em>IEEE Transactions on Image Processing</em> 34 (2025): 522–537. <a class="link" href="https://doi.org/10.1109/TIP.2025.3526065">link</a></li>
+        <li><b>Zhengyuan Zhang</b>, Tiancheng Cao, Siyu Liu, Haoran Jin, Wensong Wang, Xiangjun Yin, Chen Liu, Wang Ling Goh, Yuan Gao, and Yuanjin Zheng. “Real-Time Imaging Enhancement of Handheld Photoacoustic System with FeRAM Crossbar Array Based Neuromorphic Design.” <em>IEEE Transactions on Biomedical Circuits and Systems</em> 19 (2025): 1031–1044. <a class="link" href="https://doi.org/10.1109/TBCAS.2025.3538578">link</a></li>
+        <li><b>Zhengyuan Zhang</b>, Haoran Jin, Wenwen Zhang, Wenhao Lu, Zesheng Zheng, Arunima Sharma, Manojit Pramanik, and Yuanjin Zheng. “Adaptive Enhancement of Acoustic Resolution Photoacoustic Microscopy Imaging via Deep CNN Prior.” <em>Photoacoustics</em> 30 (2023): 100484. <a class="link" href="https://doi.org/10.1016/j.pacs.2023.100484">link</a></li>
+        <li>Zuozhou Pan<sup>+</sup>, <b>Zhengyuan Zhang</b><sup>+</sup>, Zong Meng, and Yuebing Wang. “A Novel Fault Classification Feature Extraction Method for Rolling Bearing Based on Multi-Sensor Fusion Technology and EB-1D-TP Encoding Algorithm.” <em>ISA Transactions</em> 142 (2023): 427–444. <a class="link" href="https://doi.org/10.1016/j.isatra.2023.07.015">link</a></li>
+        <li><b>Zhengyuan Zhang</b>, Haoran Jin, Zesheng Zheng, Arunima Sharma, Lipo Wang, Manojit Pramanik, and Yuanjin Zheng. “Deep and Domain Transfer Learning Aided Photoacoustic Microscopy: Acoustic Resolution to Optical Resolution.” <em>IEEE Transactions on Medical Imaging</em> 41 (2022): 3636–3648. <a class="link" href="https://doi.org/10.1109/TMI.2022.3192072">link</a></li>
+      </ul>
+      <p class="note"><sup>+</sup> co-first author · * corresponding author · <a href="#publications">Full publication list</a></p>
+
+      <h2>For more information</h2>
+      <p>More information about me can be found in my <a href="#cv">CV</a> or the <a href="files/Zhengyuan_Zhang_CV.pdf">downloadable CV</a>.</p>
+    </section>
+
+    <!-- ===================== PUBLICATIONS ===================== -->
+    <section class="view" data-view="publications" data-label="Publications">
+      <h1>Publications</h1>
+      <p class="note"><sup>+</sup> co-first author · * corresponding author · Full and current list on <a href="https://scholar.google.com/citations?user=5bXWG04AAAAJ&amp;hl=en">Google Scholar</a></p>
+
+      <h2>Journal Articles</h2>
+
+      <h3>2026</h3>
+      <ul class="pubs">
+        <li>Xiangjun Yin, Boyi Dong, <b>Zhengyuan Zhang</b>*, Wenbo Wang, Qing Liu, and Yuanjin Zheng. “Emergent Semantics in Lensless Imaging: Decoupled Segmentation with Physics-Guided Feature Inversion.” <em>IEEE Transactions on Emerging Topics in Computational Intelligence</em> (2026). <a class="link" href="https://doi.org/10.1109/TETCI.2026.3704931">link</a></li>
+        <li>Xiangjun Yin, Qiaochan Yu, Xiongfei Geng, Hui Feng, <b>Zhengyuan Zhang</b>, and Huihui Yue. “Reliability-Calibrated Spatiotemporal Interaction Modeling for Maritime Encounter Risk Forecasting.” <em>Ocean Engineering</em> (2026). <a class="link" href="https://doi.org/10.1016/j.oceaneng.2026.125752">link</a></li>
+      </ul>
+
+      <h3>2025</h3>
+      <ul class="pubs">
+        <li><b>Zhengyuan Zhang</b>, Xiangjun Yin, Zhuoyi Lin, Wenwen Zhang, Ze Feng, Arunima Sharma, Manojit Pramanik, Chia-Wen Lin, and Yuanjin Zheng. “High Temporal-Lateral Resolution Photoacoustic Microscopy Imaging with Dual Branch Graph Induced Fusion Network.” <em>IEEE Transactions on Computational Imaging</em> 12 (2025): 73–85. <a class="link" href="https://doi.org/10.1109/TCI.2025.3643726">link</a></li>
+        <li><b>Zhengyuan Zhang</b>, Zuozhou Pan, Zhuoyi Lin, Arunima Sharma, Chia-Wen Lin, Manojit Pramanik, and Yuanjin Zheng. “Acoustic Resolution Photoacoustic Microscopy Imaging Enhancement: Integration of Group Sparsity with Deep Denoiser Prior.” <em>IEEE Transactions on Image Processing</em> 34 (2025): 522–537. <a class="link" href="https://doi.org/10.1109/TIP.2025.3526065">link</a></li>
+        <li><b>Zhengyuan Zhang</b>, Tiancheng Cao, Siyu Liu, Haoran Jin, Wensong Wang, Xiangjun Yin, Chen Liu, Wang Ling Goh, Yuan Gao, and Yuanjin Zheng. “Real-Time Imaging Enhancement of Handheld Photoacoustic System with FeRAM Crossbar Array Based Neuromorphic Design.” <em>IEEE Transactions on Biomedical Circuits and Systems</em> 19 (2025): 1031–1044. <a class="link" href="https://doi.org/10.1109/TBCAS.2025.3538578">link</a></li>
+        <li>Youshen Xiao, <b>Zhengyuan Zhang</b>, Ruixi Sun, Sheng Liao, Fan Zhang, Yunhui Jiang, Xiyu Chen, Arunima Sharma, Manojit Pramanik, Yuyao Zhang, and Fei Gao. “Resolution Enhancement of Under-Sampled Photoacoustic Microscopy Images Using Neural Representation.” <em>IEEE Transactions on Computational Imaging</em> 11 (2025): 678–688. <a class="link" href="https://doi.org/10.1109/TCI.2025.3565129">link</a></li>
+        <li>Xinben Hu, Tianjian Liu, <b>Zhengyuan Zhang</b>, Xuan Xiao, Lin Chen, Gao Wei, Yunjiang Wang, Keji Yang, Haoran Jin, and Yongjian Zhu. “Standalone Ultrasound-Based Highly Visualized Volumetric Spine Imaging for Surgical Navigation.” <em>Scientific Reports</em> 15 (2025): 4922. <a class="link" href="https://doi.org/10.1038/s41598-025-89440-z">link</a></li>
+        <li>Wenwen Zhang, Shuhao Hu, <b>Zhengyuan Zhang</b>, Lei Wang, Gerhard Rigoll, Qi Jie Wang, and Zhiping Lin. “Unsupervised Attention-Based Multi-Source Domain Adaptation Framework for Drift Compensation in Electronic Nose Systems.” <em>IEEE Transactions on Instrumentation and Measurement</em> (2025). <a class="link" href="https://doi.org/10.1109/TIM.2025.3604131">link</a></li>
+      </ul>
+
+      <h3>2024</h3>
+      <ul class="pubs">
+        <li>Pengfei Qi, <b>Zhengyuan Zhang</b>, Xue Feng, Puxiang Lai, and Yuanjin Zheng. “A Symmetric Forward-Inverse Reinforcement Framework for Image Reconstruction through Scattering Media.” <em>Optics &amp; Laser Technology</em> 179 (2024): 111222. <a class="link" href="https://doi.org/10.1016/j.optlastec.2024.111222">link</a></li>
+        <li>Zuozhou Pan, <b>Zhengyuan Zhang</b>, Peng Zhao, Zong Meng, Yuebin Wang, and Yuanjin Zheng. “Multi-Sensor Signal Fusion Method for Rolling Bearing Based on the Standard Relative Mean–Variance Value and Random Weighting Algorithm.” <em>Measurement</em> 235 (2024): 114823. <a class="link" href="https://doi.org/10.1016/j.measurement.2024.114823">link</a></li>
+      </ul>
+
+      <h3>2023</h3>
+      <ul class="pubs">
+        <li><b>Zhengyuan Zhang</b>, Haoran Jin, Wenwen Zhang, Wenhao Lu, Zesheng Zheng, Arunima Sharma, Manojit Pramanik, and Yuanjin Zheng. “Adaptive Enhancement of Acoustic Resolution Photoacoustic Microscopy Imaging via Deep CNN Prior.” <em>Photoacoustics</em> 30 (2023): 100484. <a class="link" href="https://doi.org/10.1016/j.pacs.2023.100484">link</a></li>
+        <li>Zuozhou Pan<sup>+</sup>, <b>Zhengyuan Zhang</b><sup>+</sup>, Zong Meng, and Yuebing Wang. “A Novel Fault Classification Feature Extraction Method for Rolling Bearing Based on Multi-Sensor Fusion Technology and EB-1D-TP Encoding Algorithm.” <em>ISA Transactions</em> 142 (2023): 427–444. <a class="link" href="https://doi.org/10.1016/j.isatra.2023.07.015">link</a></li>
+        <li>Wenhao Lu, <b>Zhengyuan Zhang</b>, Feng Qin, Wenwen Zhang, Yuncheng Lu, Yue Liu, and Yuanjin Zheng. “Analysis on the Inherent Noise Tolerance of Feedforward Network and One Noise-Resilient Structure.” <em>Neural Networks</em> 165 (2023): 786–798. <a class="link" href="https://doi.org/10.1016/j.neunet.2023.06.011">link</a></li>
+        <li>Feng Qin, Bing Li, Lei Chen, Tao Tang, Zhuqing Wang, Yu Huang, Zhenlong Zhang, <b>Zhengyuan Zhang</b>, and Yuanjin Zheng. “Influence Mechanism of Gas Turbine Blade Thickness on Photoacoustic Signals to Guide Defect Imaging Detection.” <em>IEEE Transactions on Instrumentation and Measurement</em> 72 (2023): 1–12. <a class="link" href="https://doi.org/10.1109/TIM.2023.3329090">link</a></li>
+      </ul>
+
+      <h3>2022</h3>
+      <ul class="pubs">
+        <li><b>Zhengyuan Zhang</b>, Haoran Jin, Zesheng Zheng, Arunima Sharma, Lipo Wang, Manojit Pramanik, and Yuanjin Zheng. “Deep and Domain Transfer Learning Aided Photoacoustic Microscopy: Acoustic Resolution to Optical Resolution.” <em>IEEE Transactions on Medical Imaging</em> 41 (2022): 3636–3648. <a class="link" href="https://doi.org/10.1109/TMI.2022.3192072">link</a></li>
+      </ul>
+
+      <h2>Under Review</h2>
+      <ul class="pubs">
+        <li><b>Zhengyuan Zhang</b><sup>+</sup>, Ze Feng<sup>+</sup>, Xiangjun Yin, Zhuoyi Lin, Arunima Sharma, Manojit Pramanik, Huazhu Fu, Chia-Wen Lin, and Yuanjin Zheng. “Unsupervised Physics-Driven Generative Model for Adaptive Photoacoustic Microscopy Enhancement.” <em>IEEE Transactions on Image Processing</em>, under review.</li>
+        <li>Zhengke Sun, Zhuoyi Lin, <b>Zhengyuan Zhang</b>*, and Huazhu Fu. “Physical Model Guided Proximal Diffusion Sampling for Enhanced Photoacoustic Microscopy.” <em>IEEE Transactions on Neural Networks and Learning Systems</em>, under review.</li>
+      </ul>
+
+      <h2>Conference Papers</h2>
+      <ul class="pubs">
+        <li>Miao Sun, <b>Zhengyuan Zhang</b>, Jie Ma, Boyi Dong, Yange Wang, Zhongzhiguang Lu, and Yuanjin Zheng. “The Photoacoustic Quality-Enhancement Neural Network Processor with the Scalable and End-to-End Architecture by Improving the Sparsity Level.” <em>IEEE International Symposium on Circuits and Systems (ISCAS)</em>, 2025.<span class="tag">ORAL</span> <a class="link" href="https://doi.org/10.1109/ISCAS56072.2025.11043274">link</a></li>
+        <li>Tiancheng Cao, <b>Zhengyuan Zhang</b>, Shuailin Tao, Chen Liu, Wang Ling Goh, Yuanjin Zheng, and Yuan Gao. “Neuromorphic FeRAM-Based Co-Design for Imaging Enhancement in Handheld Photoacoustic Systems.” <em>IEEE International Symposium on Circuits and Systems (ISCAS)</em>, 2025.<span class="tag">ORAL</span> <a class="link" href="https://doi.org/10.1109/ISCAS56072.2025.11043306">link</a></li>
+        <li><b>Zhengyuan Zhang</b>, Wenwen Zhang, Haoran Jin, Zesheng Zheng, and Yuanjin Zheng. “Plug and Play Prior Regularized Algorithm for Acoustic Resolution Photoacoustic Microscopy Bioimaging System Enhancement.” <em>IEEE Biomedical Circuits and Systems Conference (BioCAS)</em>, 2023.<span class="tag">POSTER</span> <a class="link" href="https://doi.org/10.1109/BioCAS58349.2023.10388443">link</a></li>
+        <li><b>Zhengyuan Zhang</b>, Haoran Jin, Zesheng Zheng, and Yuanjin Zheng. “Learning-Based Algorithm for Real Imaging System Enhancement: Acoustic Resolution to Optical Resolution Photoacoustic Microscopy.” <em>IEEE International Symposium on Circuits and Systems (ISCAS)</em>, 2022.<span class="tag">ORAL</span> <a class="link" href="https://doi.org/10.1109/ISCAS48785.2022.9937914">link</a></li>
+        <li><b>Zhengyuan Zhang</b>, Haoran Jin, Zesheng Zheng, and Yuanjin Zheng. “Super Acoustic Resolution Photoacoustic Microscopy Imaging Enhancement.” <em>IEEE Biomedical Circuits and Systems Conference (BioCAS)</em>, 2022.<span class="tag">ORAL</span> <a class="link" href="https://doi.org/10.1109/BioCAS54905.2022.9948686">link</a></li>
+        <li><b>Zhengyuan Zhang</b>, Haoran Jin, Zesheng Zheng, Yunqi Luo, and Yuanjin Zheng. “Photoacoustic Microscopy Imaging from Acoustic Resolution to Optical Resolution Enhancement with Deep Learning.” <em>IEEE International Symposium on Circuits and Systems (ISCAS)</em>, 2021.<span class="tag">ORAL</span> <a class="link" href="https://doi.org/10.1109/ISCAS51556.2021.9401797">link</a></li>
+      </ul>
+
+      <h2>Thesis</h2>
+      <ul class="pubs">
+        <li><b>Zhengyuan Zhang</b>. “Acoustic Resolution Photoacoustic Microscopy Imaging Enhancement: Learning Based and Model Based Approaches.” Ph.D. thesis, Nanyang Technological University, 2024. <a class="link" href="https://doi.org/10.32657/10356/177423">link</a></li>
+      </ul>
+    </section>
+
+    <!-- ===================== RESEARCH ===================== -->
+    <section class="view" data-view="research" data-label="Research">
+      <h1>Research</h1>
+      <p class="lede">Projects I have led or worked on, most recent first.</p>
+
+      <div class="project">
+        <h3>Model-Based Photoacoustic Imaging Enhancement</h3>
+        <p class="meta">Project Leader · CICS Laboratory, NTU · Sep 2021 – May 2025</p>
+        <ul>
+          <li>Developed the degradation model of acoustic-resolution photoacoustic microscopy.</li>
+          <li>Designed a deep CNN denoiser prior and its optimization scheme to enhance imaging results.</li>
+          <li>Designed a joint group sparsity and deep prior model with an adaptive optimization scheme.</li>
+        </ul>
+        <p class="note">Related: <a href="https://doi.org/10.1016/j.pacs.2023.100484">Photoacoustics 2023</a> · <a href="https://doi.org/10.1109/TIP.2025.3526065">IEEE TIP 2025</a> · <a href="https://doi.org/10.1109/BioCAS58349.2023.10388443">BioCAS 2023</a></p>
+      </div>
+
+      <div class="project">
+        <h3>Learning-Based Photoacoustic Imaging Enhancement</h3>
+        <p class="meta">Project Leader · CICS Laboratory, NTU · Jul 2019 – Sep 2023</p>
+        <ul>
+          <li>Developed the degradation model of photoacoustic imaging for training data synthesis.</li>
+          <li>Used GAN-based learning to achieve realistic, high-resolution imaging enhancement.</li>
+          <li>Employed a Dual Branch Gated Fusion Network to improve imaging resolution and speed together.</li>
+        </ul>
+        <p class="note">Related: <a href="https://doi.org/10.1109/TMI.2022.3192072">IEEE TMI 2022</a> · <a href="https://doi.org/10.1109/TCI.2025.3643726">IEEE TCI 2025</a> · <a href="https://doi.org/10.1109/ISCAS51556.2021.9401797">ISCAS 2021</a> · <a href="https://doi.org/10.1109/ISCAS48785.2022.9937914">ISCAS 2022</a> · <a href="https://doi.org/10.1109/BioCAS54905.2022.9948686">BioCAS 2022</a></p>
+      </div>
+
+      <div class="project">
+        <h3>Target Capturing Based on Computer Vision</h3>
+        <p class="meta">M.Eng. Student · State Key Laboratory of Robotics and System, HIT · Apr 2018 – Jul 2019</p>
+        <ul>
+          <li>Used a binocular stereo camera to extract the position and orientation of the target.</li>
+          <li>Reconstructed the 3D model of the target with structure from motion.</li>
+          <li>Detected the handle and nozzle of the object for manipulator capturing.</li>
+        </ul>
+      </div>
+
+      <div class="project">
+        <h3>Target Manipulation Based on Impedance Control</h3>
+        <p class="meta">B.Eng. Student · State Key Laboratory of Robotics and System, HIT · Oct 2016 – Dec 2017</p>
+        <ul>
+          <li>Developed the communication program between the force/torque sensor and the controller.</li>
+          <li>Modeled the kinematics and dynamics of the manipulator and developed an impedance control strategy.</li>
+          <li>Simulated the controller in Simulink and verified the algorithm on a real manipulator.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== TEACHING ===================== -->
+    <section class="view" data-view="teaching" data-label="Teaching">
+      <h1>Teaching &amp; Service</h1>
+
+      <h2>Course Teaching</h2>
+      <div class="cv-rows">
+        <div class="cv-row"><span class="when">Aug – Nov 2026</span><div class="what"><strong>IN6242 Deep Learning Foundations</strong><p>Instructor of this postgraduate course at the Wee Kim Wee School of Communication and Information, NTU. AY2026/27 Semester 1, 13 weeks, one 3-hour class per week.</p></div></div>
+      </div>
+
+      <h2>Student Co-supervision</h2>
+      <h3>Master’s dissertations, NTU</h3>
+      <ul>
+        <li>Zhengke Sun (2024)</li>
+        <li>Ze Feng (2023)</li>
+        <li>Chenyang Liu (2022), Zeliang Hao (2022)</li>
+        <li>Yibing Duan (2021), Xiaoshi Sun (2021)</li>
+      </ul>
+      <h3>Bachelor’s final year projects, NTU</h3>
+      <ul>
+        <li>Leyi Li (2025)</li>
+        <li>Jing Lin Ong (2024)</li>
+        <li>Yu Myat Noe Oo (2023)</li>
+        <li>Potipireddi Sai Pratyusha (2022), Muralidharan Vaishnavi (2022)</li>
+        <li>Su Wai Wai Zin (2021)</li>
+      </ul>
+
+      <h2>Reviewer Service</h2>
+      <p>Journal reviewer since 2021 for:</p>
+      <ul>
+        <li><em>IEEE Transactions on Medical Imaging</em></li>
+        <li><em>IEEE Sensors Journal</em></li>
+        <li><em>Photoacoustics</em></li>
+      </ul>
+    </section>
+
+    <!-- ===================== CV ===================== -->
+    <section class="view" data-view="cv" data-label="CV">
+      <h1>CV</h1>
+      <p><a href="files/Zhengyuan_Zhang_CV.pdf">Download the full CV (PDF)</a></p>
+
+      <h2>Education</h2>
+      <div class="cv-rows">
+        <div class="cv-row"><span class="when">2019 – 2024</span><div class="what"><strong>Ph.D., Computational Imaging</strong><p>School of Electrical and Electronic Engineering, Nanyang Technological University, Singapore. Supervisor: Prof. Yuanjin Zheng. GPA 4.75/5.0.</p></div></div>
+        <div class="cv-row"><span class="when">2017 – 2019</span><div class="what"><strong>M.Eng., Mechatronics Engineering</strong><p>State Key Laboratory of Robotics and System, Harbin Institute of Technology, China. Supervisors: Academician Hong Liu (Member of the Chinese Academy of Engineering) and Prof. Minghe Jin. GPA 88.5/100, top 10%.</p></div></div>
+        <div class="cv-row"><span class="when">2013 – 2017</span><div class="what"><strong>B.Eng., Mechanical Design, Manufacturing and Automation</strong><p>School of Mechatronics Engineering, Harbin Institute of Technology, China. GPA 90.47/100, rank 22/237.</p></div></div>
+      </div>
+
+      <h2>Work Experience</h2>
+      <div class="cv-rows">
+        <div class="cv-row"><span class="when">2023 – present</span><div class="what"><strong>Postdoctoral Research Fellow</strong><p>School of Electrical and Electronic Engineering, Nanyang Technological University, Singapore. Supervisor: Prof. Yuanjin Zheng.</p></div></div>
+      </div>
+
+      <h2>Awards</h2>
+      <div class="cv-rows">
+        <div class="cv-row"><span class="when">2019 – 2023</span><p>Full Scholarship for NTU Ph.D. (4 years)</p></div>
+        <div class="cv-row"><span class="when">2017</span><p>First-Class Scholarship, Harbin Institute of Technology</p></div>
+        <div class="cv-row"><span class="when">2016</span><p>Engineering Leadership Program, Harbin Institute of Technology (10/237)</p></div>
+        <div class="cv-row"><span class="when">2016</span><p>First-Grade Scholarship, Harbin Institute of Technology (4/237)</p></div>
+        <div class="cv-row"><span class="when">2015</span><p>First-Grade Scholarship, Harbin Institute of Technology (11/237)</p></div>
+      </div>
+
+      <h2>Skills</h2>
+      <div class="cv-rows">
+        <div class="cv-row"><span class="when">Programming</span><p>Python, PyTorch, TensorFlow, OpenCV, MATLAB, C/C++, Vivado HLS, Verilog</p></div>
+        <div class="cv-row"><span class="when">Areas</span><p>Computational imaging, image restoration, inverse problems, model-based image processing, SLAM, machine learning, deep learning, matrix analysis, convex optimization, probability and statistics, hardware acceleration</p></div>
+        <div class="cv-row"><span class="when">Coursework</span><p>Image Analysis &amp; Pattern Recognition, Machine Vision, Computer Networks, Data Structures &amp; Algorithms, Computer Architecture &amp; Acceleration for Machine Learning, Operating Systems</p></div>
+        <div class="cv-row"><span class="when">Languages</span><p>Mandarin (native), English (fluent), German (fluent)</p></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-follow">
+      <strong>Follow:</strong>
+      <a href="https://scholar.google.com/citations?user=5bXWG04AAAAJ&amp;hl=en">Google Scholar</a>
+      <a href="https://www.linkedin.com/in/zhengyuan-zhang-b9953b108/">LinkedIn</a>
+      <a href="mailto:zhengyua002@e.ntu.edu.sg">Email</a>
+    </div>
+    <div>© 2026 Zhengyuan Zhang. Layout modeled on <a href="https://github.com/academicpages/academicpages.github.io">AcademicPages</a>.</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var views = Array.prototype.slice.call(document.querySelectorAll(".view"));
+  var names = views.map(function (v) { return v.dataset.view; });
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav a, .site-title"));
+
+  function show(name, scroll) {
+    if (names.indexOf(name) < 0) name = "about";
+    views.forEach(function (v) { v.hidden = v.dataset.view !== name; });
+    navLinks.forEach(function (a) {
+      if (a.getAttribute("href") === "#" + name && name !== "about") a.setAttribute("aria-current", "page");
+      else a.removeAttribute("aria-current");
+    });
+    var label = views[names.indexOf(name)].dataset.label;
+    document.title = name === "about" ? "Zhengyuan Zhang" : label + " - Zhengyuan Zhang";
+    if (scroll) window.scrollTo(0, 0);
+  }
+
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var name = a.getAttribute("href").slice(1);
+    if (names.indexOf(name) < 0) return;
+    e.preventDefault();
+    show(name, true);
+    try { history.pushState(null, "", "#" + name); } catch (err) {}
+  });
+  window.addEventListener("popstate", function () { show(location.hash.slice(1), true); });
+  window.addEventListener("hashchange", function () { show(location.hash.slice(1), true); });
+  show(location.hash.slice(1), false);
+
+  // Show initials until images/profile.jpg exists.
+  var img = document.getElementById("avatar-img");
+  function dropImg() { if (img.parentNode) img.parentNode.removeChild(img); }
+  if (img.complete && !img.naturalWidth) dropImg();
+  else img.addEventListener("error", dropImg);
+
+  // "Follow" toggle for the collapsed sidebar on narrow screens.
+  var btn = document.getElementById("follow-btn");
+  var urls = document.getElementById("author-urls");
+  btn.addEventListener("click", function () {
+    var open = urls.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+})();
+</script>
+</body>
+</html>
